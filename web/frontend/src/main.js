@@ -78,8 +78,7 @@ class TableCsv {
 }
 
 function square(url_l) {
-  $(document).ready(function(){
-    $('#load_data').click(function(){
+
       $.ajax({
         url:url_l,
         dataType:"text",
@@ -108,9 +107,7 @@ function square(url_l) {
           $('#employee_table').html(table_data);
         }
       });
-    });
 
-  });
 }
 
 window.onload = function() {
