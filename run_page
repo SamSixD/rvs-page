@@ -1,0 +1,6 @@
+cd ./web
+./gradlew build
+./gradlew bootrun &
+sleep 30
+cd ./frontend
+npm run serve -- --port 8081
