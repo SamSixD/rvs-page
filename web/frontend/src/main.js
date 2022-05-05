@@ -77,16 +77,44 @@ class TableCsv {
   }
 }
 
-const tableRoot = document.querySelector("#csvRoot");
-const csvFileInput = document.querySelector("#csvFileInput");
-const tableCsv = new TableCsv(tableRoot);
+function square(url_l) {
+  $(document).ready(function(){
+    $('#load_data').click(function(){
+      $.ajax({
+        url:url_l,
+        dataType:"text",
+        success:function(data)
+        {
+          var employee_data = data.split(/\r?\n|\r/);
+          var table_data = '<table class="table table-bordered table-striped">';
+          for(var count = 0; count<employee_data.length; count++)
+          {
+            var cell_data = employee_data[count].split(",");
+            table_data += '<tr>';
+            for(var cell_count=0; cell_count<cell_data.length; cell_count++)
+            {
+              if(count === 0)
+              {
+                table_data += '<th>'+cell_data[cell_count]+'</th>';
+              }
+              else
+              {
+                table_data += '<td>'+cell_data[cell_count]+'</td>';
+              }
+            }
+            table_data += '</tr>';
+          }
+          table_data += '</table>';
+          $('#employee_table').html(table_data);
+        }
+      });
+    });
 
-csvFileInput.addEventListener("change", (e) => {
-  Papa.parse(csvFileInput.files[0], {
-    delimiter: ",",
-    skipEmptyLines: true,
-    complete: (results) => {
-      tableCsv.update(results.data.slice(1), results.data[0]);
-    }
   });
-});
+}
+
+window.onload = function() {
+  square("gamescore.csv");
+};
+
+
