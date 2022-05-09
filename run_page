@@ -1,4 +1,3 @@
-cd ./web
 ./gradlew build
 echo sucessfully built!
 kill -9 $(lsof -ti:8080)

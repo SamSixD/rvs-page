@@ -1,4 +1,0 @@
-rootProject.name = 'spring-boot-vue-example'
-include 'backend'
-include 'frontend'
-
