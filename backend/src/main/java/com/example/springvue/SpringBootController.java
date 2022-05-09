@@ -21,10 +21,11 @@ class SpringBootController {
     }
 
     @GetMapping(value = "/games", produces = MediaType.APPLICATION_JSON_VALUE)
+
     List<Game> games() throws IOException {
         List<Game> returnValue = new ArrayList<>();
 
-        Path thePath = Paths.get("/Users/sam/IdeaProjects/spring-boot-vue-example/rvs-page/web/backend/src/main/resources/gamescore.csv");
+        Path thePath = Paths.get("/Users/sam/IdeaProjects/spring-boot-vue-example/rvs-page/backend/src/main/resources/gamescore.csv");
         List<String> allRows = Files.readAllLines(thePath);
         //Read all rows at once
 
