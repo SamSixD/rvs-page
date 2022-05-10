@@ -40,7 +40,7 @@ public class SpringBootControllerTest {
             //System.out.printf("%d%d", first, second);
 
         }
-        
+
     }
 
     @Test
@@ -75,8 +75,35 @@ public class SpringBootControllerTest {
 
         }
 
+    }
 
+    @Test
+    // Test that length of games = 75
+    public void testZeldaSearch() throws IOException {
+
+        List<Game> games = sbc.gameFind("Zelda");
+
+        int actual = games.size();
+
+        int expected = 8;
+
+        assertEquals("Expected game length to be 8",expected, actual);
 
     }
+
+    @Test
+    // Test that length of games = 75
+    public void testZeldaName() throws IOException {
+
+        List<Game> games = sbc.gameFind("Zelda");
+
+        for (Game game : games) {
+            String name = game.getName();
+            assertTrue(name.contains("Zelda"));
+        }
+
+    }
+
+
 }
 
