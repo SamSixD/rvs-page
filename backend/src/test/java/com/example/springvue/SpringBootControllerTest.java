@@ -40,9 +40,7 @@ public class SpringBootControllerTest {
             //System.out.printf("%d%d", first, second);
 
         }
-
-
-
+        
     }
 
     @Test

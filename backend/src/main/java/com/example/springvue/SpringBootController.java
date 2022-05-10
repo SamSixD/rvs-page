@@ -64,6 +64,7 @@ class SpringBootController {
 
     List<Game> zeldaFind() throws IOException {
         List<Game> returnValue = new ArrayList<>();
+        String search = "Zelda";
 
         Path thePath = Paths.get("/Users/sam/IdeaProjects/spring-boot-vue-example/rvs-page/backend/src/main/resources/gamescore.csv");
         List<String> allRows = Files.readAllLines(thePath);
@@ -89,7 +90,7 @@ class SpringBootController {
                 game.setScore(score);
 
                 returnValue.add(game);
-                if (contains(name, "Zelda")) {
+                if (name.contains(search)) {
                     returnValue.add(game);
                 }
 
