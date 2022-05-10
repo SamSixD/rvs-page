@@ -11,6 +11,6 @@ public class SpringBootService {
     private SpringBootRepository repository;
     public List<Game> find(){
 
-        return repository.find();
+        return repository.find("Zelda",50,100);
     }
 }

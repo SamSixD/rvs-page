@@ -11,32 +11,39 @@ import java.util.List;
 //database
 @Component
 public class SpringBootRepository {
-@Autowired
+    @Autowired
     private DataSource dataSource;
 
-    public List<Game> find() {
+    public List<Game> find(String name, Integer min, Integer max) {
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM games ORDER BY position");
-             ResultSet results = statement.executeQuery();
-        ) {
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM games WHERE position  >= ? AND position  <= ? AND name LIKE '%'||?||'%' ORDER BY position")) {
 
-            List<Game> gameList = new ArrayList<>();
-            while (results.next()) {
-                Game game = new Game();
+            statement.setInt(1, min);
+            statement.setInt(2, max);
+            statement.setString(3, name);
 
 
-                game.setPosition(results.getInt("position"));
-                game.setName(results.getString("name"));
-                game.setScore(results.getInt("score"));
+            try (
+                    ResultSet results = statement.executeQuery();
+            ) {
 
-                gameList.add(game);
+                List<Game> gameList = new ArrayList<>();
+                while (results.next()) {
+                    Game game = new Game();
+
+
+                    game.setPosition(results.getInt("position"));
+                    game.setName(results.getString("name"));
+                    game.setScore(results.getInt("score"));
+
+                    gameList.add(game);
+
+                }
+
+                return gameList;
 
             }
-
-            return gameList;
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
