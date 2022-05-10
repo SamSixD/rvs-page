@@ -79,9 +79,9 @@ public class SpringBootControllerTest {
 
     @Test
     // Test that length of games = 75
-    public void testZeldaSearch() throws IOException {
+    public void testSearch() throws IOException {
 
-        List<Game> games = sbc.gameFind("Zelda");
+        List<Game> games = sbc.gameFind("Zelda",0,100);
 
         int actual = games.size();
 
@@ -93,9 +93,9 @@ public class SpringBootControllerTest {
 
     @Test
     // Test that length of games = 75
-    public void testZeldaName() throws IOException {
+    public void testGameName() throws IOException {
 
-        List<Game> games = sbc.gameFind("Zelda");
+        List<Game> games = sbc.gameFind("ZeLdA",0,100);
 
         for (Game game : games) {
             String name = game.getName();
@@ -103,7 +103,50 @@ public class SpringBootControllerTest {
         }
 
     }
+    @Test
+    // Test that length of games = 75
+    public void testGameRange() throws IOException {
+
+        List<Game> games = sbc.gameFind("",60,73);
+
+        int actual = games.size();
+
+        int expected = 14;
+
+        assertEquals("Expected game range length to be 14",expected, actual);
+        }
+
+    @Test
+    // Tests that games are in order
+    public void testOrderSet() throws IOException {
+        List<Game> games = sbc.gameFind("",0,100);
+
+        for (int i = 1; i < 11; i++) {
+
+            int first = games.get(i).getPosition();
+            int second = games.get(i+(2*i)).getPosition();
+
+            //System.out.printf("%d%d", i,"");
+
+            assertTrue("Games are not listed in the correct order",(first<second));
+            //System.out.printf("%d%s%d", first, "_", second);
+
+        }
+
+    }
 
 
-}
 
+
+
+    }
+
+
+
+
+
+
+
+//order check <>
+//postgresql set up
+//

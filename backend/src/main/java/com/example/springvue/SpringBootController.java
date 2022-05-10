@@ -19,14 +19,14 @@ import java.util.List;
 @RestController
 class SpringBootController {
 
-    public static void main(String[] args) throws IOException {
-        SpringBootController sbc = new SpringBootController();
-        List<Game> games = sbc.gameFind("Zelda");
-        for (Game game : games) {
-            System.out.println(game.getName());
-        }
-
-    }
+//    public static void main(String[] args) throws IOException {
+//        SpringBootController sbc = new SpringBootController();
+//        List<Game> games = sbc.gameFind("Zelda");
+//        for (Game game : games) {
+//            System.out.println(game.getName());
+//        }
+//
+//    }
 
     @GetMapping(value = "/games", produces = MediaType.APPLICATION_JSON_VALUE)
     List<Game> games() throws IOException {
@@ -66,8 +66,14 @@ class SpringBootController {
     }
 
     @GetMapping(value = "/games/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<Game> gameFind(@RequestParam(defaultValue = "") String name) throws IOException {
+    List<Game> gameFind(
+            @RequestParam(defaultValue = "") String name,
+            @RequestParam(defaultValue = "0") Integer min,
+            @RequestParam(defaultValue = "100") Integer max
+    ) throws IOException {
         List<Game> returnValue = new ArrayList<>();
+        //
+
         //String search = "Zelda";
 
         Path thePath = Paths.get("/Users/sam/IdeaProjects/spring-boot-vue-example/rvs-page/backend/src/main/resources/gamescore.csv");
@@ -83,20 +89,26 @@ class SpringBootController {
 
             try {
                 String gameName = parts[1].replaceAll("\"", "");
-                if (!gameName.contains(name)) {
+                if (!gameName.toLowerCase().contains(name.toLowerCase())) {
 
                     continue;
 
                 }
 
                 String positionWithoutQuotations = parts[0].replaceAll("\"", "");
+                int position = Integer.parseInt(positionWithoutQuotations);
+                if (position< min || position>max) {
+                    continue;
+                }
+
+
+
                 String scorepo = parts[2].replaceAll("\"", "");
 
-                int position = Integer.parseInt(positionWithoutQuotations);
                 int score = Integer.parseInt(scorepo);
 
-                game.setPosition(position);
                 game.setName(gameName);
+                game.setPosition(position);
                 game.setScore(score);
 
                 returnValue.add(game);
@@ -104,7 +116,7 @@ class SpringBootController {
 
             } catch (NumberFormatException e) {
                 System.out.println("I HAVE THROWN AN ERROR ON LINE: " + row);
-                
+
             }
         }
 
