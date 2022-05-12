@@ -54,7 +54,11 @@ public class SpringBootRepository {
 
     }
 
-    public void addGame(String name, Integer pos, Integer score) {
+    public void addGame(Game game) {
+
+        String name = game.getName();
+        Integer pos = game.getPosition();
+        Integer score = game.getScore();
 
 
         try (Connection connection = dataSource.getConnection();

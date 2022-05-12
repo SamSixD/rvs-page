@@ -51,6 +51,6 @@ class SpringBootController {
 
     {
         service.addGame(game);
-        System.out.println(game.toString());
+
     }
 }

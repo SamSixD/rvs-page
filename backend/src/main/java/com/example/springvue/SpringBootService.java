@@ -14,6 +14,7 @@ public class SpringBootService {
         return repository.find(name,minPos,maxPos,minScore,maxScore);
     }
     public void addGame(Game game){
-        repository.addGame(game.getName(),game.getPosition(),game.getScore());
+        repository.addGame(game);
+
     }
 }
