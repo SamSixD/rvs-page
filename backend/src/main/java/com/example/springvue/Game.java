@@ -31,4 +31,15 @@ public class Game {
     public void setScore(Integer score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "name='" + name + '\'' +
+                ", position=" + position +
+                ", score=" + score +
+                '}';
+    }
+
+
 }
