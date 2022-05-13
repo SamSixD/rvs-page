@@ -10,19 +10,20 @@
 <script>
 export default {
   name: "Form",
-  methods:{
-    data() {
-      return {
-        name: "",
-        position: "",
-        score: ""
-      }
-    }, handleSubmit() {
+  data() {
+    return {
+      name: "",
+      position: "",
+      score: ""
+    }
+  },
+  methods: {
+    handleSubmit() {
       const game = {name: this.name, position: this.position, score: this.score}
 // console.log(game.toString(),JSON.stringify(game))
       fetch('/games', {
         method: "POST",
-         headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(game)
       }).then(result => {
         console.log(result);

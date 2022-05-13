@@ -25,12 +25,15 @@ export default {
 
   },
   methods: {
+
     getGames() {
       fetch('/games?maxScore=100000&maxPos=100000')
 
           .then(response => response.json())
           .then(data => this.games = data)
-    }, handleDeletion(gameId) {
+    },
+
+    handleDeletion(gameId) {
 
       fetch('/games/' + gameId, {
         method: "DELETE",
@@ -38,7 +41,9 @@ export default {
         console.log(gameId + 'has been deleted!');
       }).catch(err => console.log(err));
     }
-  }, mounted() {
+  },
+
+  mounted() {
     this.getGames()
   }
 
