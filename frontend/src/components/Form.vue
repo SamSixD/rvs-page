@@ -21,6 +21,8 @@ export default {
   },
   methods: {
     handleSubmit() {
+
+
       const game = {name: this.name, position: this.position, score: this.score}
 // console.log(game.toString(),JSON.stringify(game))
       fetch('/games', {
@@ -29,10 +31,12 @@ export default {
         body: JSON.stringify(game)
       }).then(result => {
         console.log(result);
-        this.$emit("save")
-        resolve(result.translations[0].translation);
-      }).catch(err => console.log(err));
-      this.getGames()
+        this.$emit("save");
+       // console.log(result.translations[0].translation)
+        //resolve(result.translations[0].translation);
+        //this.getGames();
+      });
+
     }
   }
 }

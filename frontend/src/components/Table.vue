@@ -29,17 +29,18 @@ export default {
       fetch('/games?maxScore=100000&maxPos=100000')
 
           .then(response => response.json())
-          .then(data => this.games = data)
+          .then(data => {this.games = data;
+            console.log('game list has been populated!')}
+          )
     },
 
     handleDeletion(gameId) {
-
       fetch('/games/' + gameId, {
         method: "DELETE",
       }).then(result => {
-        console.log(gameId + 'has been deleted!');
+        console.log(gameId + 'has been deleted!');this.getGames();
       }).catch(err => console.log(err));
-      this.getGames()
+
     }
   },
 
