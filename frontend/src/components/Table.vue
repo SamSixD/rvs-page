@@ -5,7 +5,6 @@
       <th>Name</th>
       <th>Score</th>
       <th>Remove Game</th>
-      <th>id-test</th>
     </tr>
     <tr v-for="game in games">
       <td>{{ game.position }}</td>
@@ -40,6 +39,7 @@ export default {
       }).then(result => {
         console.log(gameId + 'has been deleted!');
       }).catch(err => console.log(err));
+      this.getGames()
     }
   },
 

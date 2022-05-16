@@ -2,15 +2,17 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <Form></Form>
-    <Table></Table>
+    <Form @save="handleSave"></Form>
+    <Table ref="table"></Table>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import HelloWorld from './components/HelloWorld.vue';
 import Form from "@/components/Form";
 import Table from "@/components/Table";
+
 
 export default {
   name: 'app',
@@ -18,8 +20,15 @@ export default {
     Form,
     Table,
     HelloWorld
+  },
+
+  methods:{
+    handleSave(){
+      this.$refs.table.getGames()
+    }
   }
 }
+
 </script>
 
 <style>

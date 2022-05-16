@@ -47,7 +47,7 @@ class SpringBootController {
             @RequestParam(defaultValue = "0") Integer minScore,
             @RequestParam(defaultValue = "100") Integer maxScore,
             @RequestParam(defaultValue = "0") Integer minId,
-            @RequestParam(defaultValue = "100") Integer maxId
+            @RequestParam(defaultValue = "10000000") Integer maxId
     ) throws IOException {
 
         return service.getGame(name, minPos, maxPos, minScore, maxScore, minId, maxId);

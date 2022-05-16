@@ -5,9 +5,11 @@
     <input v-model="score">
     <button @click.prevent="handleSubmit">submit</button>
   </form>
+
 </template>
 
 <script>
+
 export default {
   name: "Form",
   data() {
@@ -27,8 +29,10 @@ export default {
         body: JSON.stringify(game)
       }).then(result => {
         console.log(result);
+        this.$emit("save")
         resolve(result.translations[0].translation);
       }).catch(err => console.log(err));
+      this.getGames()
     }
   }
 }
