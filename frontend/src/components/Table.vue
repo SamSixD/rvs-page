@@ -14,6 +14,7 @@
         <button @click.prevent="handleDeletion(game.id)">Delete Game</button>
       </td>
     </tr>
+    
   </table>
 </template>
 

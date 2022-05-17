@@ -2,7 +2,8 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <Form @save="handleSave"></Form>
+    <Form @submitEve="handleSave"></Form>
+<!--    <Form @save="handleSave"></Form>-->
     <Table ref="table"></Table>
   </div>
 </template>
@@ -23,8 +24,26 @@ export default {
   },
 
   methods:{
-    handleSave(){
-      this.$refs.table.getGames()
+    handleSave(nameAdd,positionAdd,scoreAdd){
+      const game = {name: nameAdd, position: positionAdd, score: scoreAdd}
+
+      fetch('/games', {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(game)
+      }).then(result => {
+        console.log(result);
+        this.$refs.table.getGames()
+        //this.$emit("save");
+
+        // console.log(result.translations[0].translation)
+        //resolve(result.translations[0].translation);
+        //this.getGames();
+      });
+
+
+
+
     }
   }
 }
