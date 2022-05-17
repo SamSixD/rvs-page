@@ -6,7 +6,8 @@
       <th>Score</th>
       <th>Remove Game</th>
     </tr>
-    <template v-for="game in games">
+
+    <template v-for="(game,index) in games">
 
       <tr>
         <td>{{ game.position }}</td>
@@ -18,25 +19,27 @@
       </tr>
 
       <tr>
-        <td> </td>
-        <td> <button @click="awesome = !awesome">Toggle</button> </td>
-      </tr>
-
-
-      <tr v-if="awesome === awesome">
-
-        <td> <input type="text" id="updatePos"> </td>
-        <td> <input type="text" id="updateName"> </td>
-        <td> <input type="text" id="updateScore"> </td>
+        <td></td>
         <td>
-
-          <button @click.prevent="handleUpdate(game.id)">Update Game</button>
+          <button @click.prevent="updateOpen=index"></button>
         </td>
       </tr>
 
 
-    </template>
+      <tr v-if="index===updateOpen">
 
+        <td>
+          <Form :key="index" @submitEve="(n,p,s)=>handleUpdate(game.id,n,p,s)" :prop-name="game.name"
+                :prop-position="game.position" :prop-score="game.score">
+
+          </Form>
+        </td>
+
+
+      </tr>
+
+
+    </template>
 
 
   </table>
@@ -45,10 +48,13 @@
 <script>
 
 
+import Form from "@/components/Form";
 
 export default {
-  name: "Table", data() {
-    return {games: []}
+  name: "Table",
+  components: {Form},
+  data() {
+    return {games: [], updateOpen: null}
 
   },
   methods: {
@@ -57,8 +63,10 @@ export default {
       fetch('/games?maxScore=100000&maxPos=100000')
 
           .then(response => response.json())
-          .then(data => {this.games = data;
-            console.log('game list has been populated!')}
+          .then(data => {
+                this.games = data;
+                console.log('game list has been populated!')
+              }
           )
     },
 
@@ -66,18 +74,23 @@ export default {
       fetch('/games/' + gameId, {
         method: "DELETE",
       }).then(result => {
-        console.log(gameId + 'has been deleted!');this.getGames();
+        console.log(gameId + 'has been deleted!');
+        this.getGames();
       }).catch(err => console.log(err));
 
     },
-    handleUpdate(gameId) {
-      var pos = (document.getElementById("updatePos").value);
-      var name = (document.getElementById("updateName").value);
-      var score = (document.getElementById("updateScore").value);
 
-
-   console.log(gameId,pos,name,score)
-
+    handleUpdate(gameId, nameAdd, positionAdd, scoreAdd) {
+      const game = {name: nameAdd, position: positionAdd, score: scoreAdd}
+      const address = '/games/' + gameId
+      fetch(address, {
+        method: "PUT",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(game)
+      }).then(result => {
+        console.log(result);
+        this.getGames()
+      })
     }
   },
 

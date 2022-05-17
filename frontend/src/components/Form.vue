@@ -14,9 +14,9 @@ export default {
   name: "Form",
   data() {
     return {
-      name: "",
-      position: "",
-      score: ""
+      name: this.propName,
+      position: this.propPosition,
+      score: this.propScore
     }
   },
   methods: {
@@ -29,7 +29,7 @@ export default {
 
 
     }
-  }
+  },props:{propName:String,propPosition:Number,propScore:Number}
 }
 </script>
 
