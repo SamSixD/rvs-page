@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <EleForm> </EleForm>
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <Form @submitEve="handleSave"></Form>
 <!--    <Form @save="handleSave"></Form>-->
     <Table ref="table"></Table>
+
   </div>
 </template>
 
@@ -13,6 +15,7 @@
 import HelloWorld from './components/HelloWorld.vue';
 import Form from "@/components/Form";
 import Table from "@/components/Table";
+import EleForm from "@/components/EleForm.vue";
 
 
 export default {
@@ -20,7 +23,8 @@ export default {
   components: {
     Form,
     Table,
-    HelloWorld
+    HelloWorld,
+    EleForm
   },
 
   methods:{

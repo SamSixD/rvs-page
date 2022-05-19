@@ -25,7 +25,6 @@
         </td>
       </tr>
 
-
       <tr v-if="index===updateOpen">
 
         <td>
