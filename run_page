@@ -4,6 +4,6 @@ kill -9 $(lsof -ti:8080)
 kill -9 $(lsof -ti:8081)
 echo now executing bootrun...
 ./gradlew bootrun &
-sleep 30
+
 cd ./frontend
 npm run serve -- --port 8081
