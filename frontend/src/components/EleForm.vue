@@ -1,6 +1,8 @@
 <template>
   <el-table
       :data="tableData"
+      :header-cell-style="{color:'black'}"
+    border
       stripe
       style="width: 100%">
     <el-table-column

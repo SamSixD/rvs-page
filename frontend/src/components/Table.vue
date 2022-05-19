@@ -1,47 +1,49 @@
 <template>
-  <table>
-    <tr>
-      <th>Position</th>
-      <th>Name</th>
-      <th>Score</th>
-      <th>Remove Game</th>
-    </tr>
-
-    <template v-for="(game,index) in games">
-
-      <tr>
-        <td>{{ game.position }}</td>
-        <td>{{ game.name }}</td>
-        <td>{{ game.score }}</td>
-        <td>
-          <button @click.prevent="handleDeletion(game.id)">Delete Game</button>
-        </td>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td>
-          <button @click.prevent="updateOpen=index"></button>
-        </td>
-      </tr>
-
-      <tr v-if="index===updateOpen">
-
-        <td>
-          <Form :key="index" @submitEve="(n,p,s)=>handleUpdate(game.id,n,p,s)" :prop-name="game.name"
-                :prop-position="game.position" :prop-score="game.score">
-
-          </Form>
-        </td>
+<!--  <table>-->
+  <el-table
+      :data="games"
+      :header-cell-style="{color:'black'}"
+      border
+      stripe
+      style="width: 100%">
 
 
-      </tr>
+    <el-table-column
+        prop="position"
+        label="Position"
+        >
+    </el-table-column>
+    <el-table-column
+        prop="name"
+        label="Name"
+        >
+    </el-table-column>
+    <el-table-column
+        prop="score"
+        label="Score"
+        >
+    </el-table-column>
+
+    <el-table-column
+        prop="id"
+
+        label="Delete">
+      <template slot-scope="{row}">
+        <el-button
+
+            type="primary"
+            native-type="button"
+
+            @click="handleDeletion(row.id)"
+        >
+          Delete Entry
+        </el-button>
+      </template>
+    </el-table-column>
 
 
-    </template>
 
-
-  </table>
+  </el-table>
 </template>
 
 <script>
@@ -67,6 +69,12 @@ export default {
                 console.log('game list has been populated!')
               }
           )
+    },
+
+    handleWhat(what) {
+        console.log(what);
+
+
     },
 
     handleDeletion(gameId) {
