@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <EleForm> </EleForm>
+<!--    <EleForm> </EleForm>-->
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <Form @submitEve="handleSave"></Form>
 <!--    <Form @save="handleSave"></Form>-->
